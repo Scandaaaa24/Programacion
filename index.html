@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desarrollo y Programación de Software</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+      color:white;
+      height:100vh;
+    }
+
+    header{
+      background: rgba(0,0,0,0.6);
+      padding:20px;
+      text-align:center;
+      font-size:28px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    nav{
+      background:#111;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      padding:15px;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:white;
+      background:#00c6ff;
+      padding:10px 20px;
+      border-radius:25px;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    nav a:hover{
+      background:#0072ff;
+      transform:scale(1.1);
+    }
+
+    .contenido{
+      text-align:center;
+      margin-top:80px;
+      padding:20px;
+    }
+
+    h1{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    p{
+      font-size:18px;
+    }
+
+    footer{
+      position:fixed;
+      bottom:0;
+      width:100%;
+      background:rgba(0,0,0,0.6);
+      text-align:center;
+      padding:10px;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  Desarrollo y Programación de Software
+</header>
+
+<nav>
+  <a href="#inicio" onclick="mostrar('inicio')">Inicio</a>
+  <a href="#autor" onclick="mostrar('autor')">Autor</a>
+  <a href="Deberes1.html">Deber 1</a>
+</nav>
+
+<div class="contenido" id="contenido">
+  <h1>Bienvenido</h1>
+  <p>Esta es mi página web académica.</p>
+</div>
+
+<footer>
+  Desarrollado por ETHAN MORAN © 2026
+</footer>
+
+<script>
+function mostrar(seccion){
+
+  const contenido = document.getElementById("contenido");
+
+  if(seccion === "inicio"){
+    contenido.innerHTML = `
+      <h1>Bienvenido</h1>
+      <p>Esta página contiene mis deberes de programación.</p>
+    `;
+  }
+
+  if(seccion === "autor"){
+    contenido.innerHTML = `
+      <h1>Autor</h1>
+      <p>Nombre: <strong>Ethan Moran</strong></p>
+      <p>Materia: Desarrollo y Programación de Software</p>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
