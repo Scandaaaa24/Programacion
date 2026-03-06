@@ -3,70 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deber 1</title>
-
+    <title>Deberes · tarjetas neumorphism</title>
+    <!-- Font Awesome 6 (gratuito) para iconos representativos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            background:#f4f4f4;
-            text-align:center;
-            padding:40px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .contenedor{
-            background:white;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0px 5px 15px rgba(0,0,0,0.2);
-            max-width:600px;
-            margin:auto;
+        body {
+            min-height: 100vh;
+            background: #0f0f12;        /* fondo oscuro moderno, ligeramente azulado */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
         }
 
-        h1{
-            color:#333;
+        /* contenedor principal del grid */
+        .dashboard {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
         }
 
-        a{
-            display:inline-block;
-            margin-top:20px;
-            text-decoration:none;
-            background:#007BFF;
-            color:white;
-            padding:10px 20px;
-            border-radius:20px;
+        .dashboard h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #f0f0f5;
+            margin-bottom: 2.5rem;
+            border-left: 6px solid #7b4dff;
+            padding-left: 1.2rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
-        a:hover{
-            background:#0056b3;
+        /* grid responsive */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem 1.8rem;
+            justify-content: center;
+        }
+
+        /* ===== ESTILO BASE DE LA CARD (neumorphism suave / soft shadow) ===== */
+        .task-card {
+            background: #eef0f5;          /* card clara con ligera calidez */
+            border-radius: 32px;           /* bordes redondeados amplios */
+            padding: 1.8rem 1.5rem 1.8rem 1.5rem;
+            box-shadow: 
+                -12px -12px 24px rgba(255, 255, 255, 0.7),     /* luz superior izquierda (neumorphism) */
+                12px 12px 24px rgba(0, 0, 0, 0.25);            /* sombra inferior derecha oscura */
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(2px);    /* pequeña difuminación para dar profundidad */
+            color: #1d1d2a;
+        }
+
+        /* efecto hover: elevarse ligeramente + sombra más pronunciada */
+        .task-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                -14px -14px 28px rgba(255, 255, 255, 0.8),
+                18px 18px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        /* cabecera de la card: icono + título */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-wrapper {
+            background: #1e1e2f;
+            color: #a88bff;
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            box-shadow: 
+                inset -3px -3px 8px rgba(255,255,255,0.6),
+                inset 3px 3px 8px rgba(0,0,0,0.2);
+            background: linear-gradient(145deg, #26263b, #18182a);
+            transition: 0.2s ease;
+        }
+
+        .task-card:hover .icon-wrapper {
+            box-shadow: 
+                inset -2px -2px 5px rgba(255,255,255,0.5),
+                inset 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .icon-wrapper i {
+            filter: drop-shadow(0 2px 4px rgba(106, 76, 255, 0.4));
+        }
+
+        .card-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #18182a;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(0,0,0,0.1);
+            line-height: 1.1;
+        }
+
+        /* descripción del deber */
+        .task-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0.8rem 0 1.6rem 0;
+            color: #2e2e42;
+            font-weight: 400;
+            background: rgba(220, 225, 235, 0.6);
+            padding: 0.9rem 1rem;
+            border-radius: 18px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.7), inset 0 -2px 4px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.4);
+            flex: 1;
+        }
+
+        /* zona de botones */
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        /* estilo base botones — con color azul/morado brillante */
+        .btn {
+            flex: 1 1 auto;
+            min-width: 100px;
+            padding: 0.8rem 0.2rem;
+            border: none;
+            border-radius: 40px;           /* botones tipo píldora */
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 12px rgba(98, 60, 231, 0.3), 0 2px 4px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: linear-gradient(145deg, #6b4dff, #8a6aff);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* efecto iluminación hover en botones: brillo y ligero cambio de color */
+        .btn:hover {
+            background: linear-gradient(145deg, #8267ff, #9b82ff);
+            box-shadow: 0 10px 18px rgba(106, 70, 255, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+            color: white;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 3px 8px rgba(78, 50, 200, 0.6);
+        }
+
+        /* estilo particular para diferenciar vista previa (morado más intenso) */
+        .btn-preview {
+            background: linear-gradient(145deg, #7d3eff, #a46eff);
+        }
+        .btn-preview:hover {
+            background: linear-gradient(145deg, #935eff, #b682ff);
+        }
+
+        /* iconos dentro de botones (opcional) */
+        .btn i {
+            font-size: 0.95rem;
+        }
+
+        /* responsivo para pantallas pequeñas */
+        @media (max-width: 540px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .task-card {
+                padding: 1.5rem;
+            }
+            .card-header h2 {
+                font-size: 2rem;
+            }
+            .dashboard h1 {
+                font-size: 1.9rem;
+            }
+        }
+
+        /* pequeños detalles extra: animación suave en botones desde carga */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 150%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .btn:hover::after {
+            opacity: 0.5;
+        }
+
+        /* sutil efecto de luz en card completa al hacer hover (adicional) */
+        .task-card {
+            position: relative;
+        }
+
+        .task-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 32px;
+            padding: 2px;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.8), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.25s;
+            pointer-events: none;
+        }
+
+        .task-card:hover::before {
+            opacity: 0.35;
+        }
+
+        /* decoración sutil */
+        .footer-note {
+            margin-top: 3rem;
+            color: #a1a1b0;
+            font-size: 0.9rem;
+            border-top: 1px dashed #333346;
+            padding-top: 1.8rem;
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+    <div class="dashboard">
+        <h1><i class="fas fa-check-circle" style="margin-right: 10px; color: #a88bff;"></i> Mis deberes · colección interactiva</h1>
 
-<div class="contenedor">
-    <h1>Deber 1</h1>
-  <pre><code>
-    def saludar():
-    print("Calculadora basica \n1..para sumar\n2..para restar")
-   
-  </code></pre>
+        <div class="cards-grid">
+            <!-- Deber 1 -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h2>Deber 1</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-feather-alt" style="margin-right: 6px; color:#4f43b0;"></i> 
+                    Redactar ensayo sobre diseño UI/UX y principios de usabilidad.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
 
+            <!-- Deber 2 -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h2>Deber 2</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-laptop-code" style="margin-right: 6px; color:#4f43b0;"></i>
+                    Maquetar componente de card con neumorphism en HTML y CSS puro.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
 
-    <p>
-        El deber 1 trata sobre la <strong>sentencia IF</strong> en programación.
-        Esta sentencia se utiliza para tomar decisiones dentro de un programa,
-        permitiendo ejecutar una acción cuando una condición es verdadera.
-    </p>
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-  <iframe src="https://drive.google.com/file/d/1tE3uFgxXIIBIvK5BpvgRnqrZ_BERzh55/preview"
-    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
-    allow="autoplay; encrypted-media" allowfullscreen>
-  </iframe>
+            <!-- Deber 3 -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2>Deber 3</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-database" style="margin-right: 6px; color:#4f43b0;"></i>
+                    Análisis de datos de ventas: gráfico interactivo y conclusiones.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
 
+            <!-- Deber 4 (ejemplo extra) -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h2>Deber 4</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-atom" style="margin-right: 6px; color:#4f43b0;"></i>
+                    Laboratorio de química: preparar informe de reacciones y ph.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
 
-</div>
-    <a href="index.html">Volver a la portada</a>
-</div>
+            <!-- Deber 5 -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2>Deber 5</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-map-marked-alt" style="margin-right: 6px; color:#4f43b0;"></i>
+                    Geografía: identificar capitales de Europa y accidentes geográficos.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
 
+            <!-- Deber 6 -->
+            <div class="task-card">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-camera-retro"></i>
+                    </div>
+                    <h2>Deber 6</h2>
+                </div>
+                <p class="task-description">
+                    <i class="fas fa-images" style="margin-right: 6px; color:#4f43b0;"></i>
+                    Fotografía: seleccionar 10 fotos para portafolio y edición básica.
+                </p>
+                <div class="card-actions">
+                    <button class="btn"><i class="fas fa-eye"></i> Ver</button>
+                    <button class="btn btn-preview"><i class="fas fa-mouse-pointer"></i> Vista previa</button>
+                </div>
+            </div>
+        </div> <!-- fin cards-grid -->
+
+        <div class="footer-note">
+            <i class="fas fa-magic" style="color: #9678ff;"></i>  Diseño neumorphism · cards con elevación suave · botones de iluminación
+        </div>
+    </div>
+
+    <!-- pequeño script para simular acciones (solo UX, no funcional) -->
+    <script>
+        (function() {
+            const buttons = document.querySelectorAll('.btn');
+            for (let btn of buttons) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const text = btn.innerText.includes('Ver') ? 'Ver' : 'Vista previa';
+                    // Solo un mensaje amigable que no interrumpe
+                    if (confirm(`Has hecho clic en "${text}" (demostración interactiva). ¿Abrir simulación?`)) {
+                        alert('✨ Aquí se abriría el contenido del deber.');
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
