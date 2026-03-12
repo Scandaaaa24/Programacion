@@ -1,120 +1,259 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desarrollo y Programación de Software</title>
+<meta charset="UTF-8">
+<title>Inicio</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-      color:white;
-      height:100vh;
-    }
+<style>
 
-    header{
-      background: rgba(0,0,0,0.6);
-      padding:20px;
-      text-align:center;
-      font-size:28px;
-      font-weight:bold;
-      letter-spacing:1px;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-    nav{
-      background:#111;
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      padding:15px;
-      flex-wrap:wrap;
-    }
+body{
+background:url("https://static.vecteezy.com/system/resources/previews/004/736/717/non_2x/abstract-black-background-design-banner-pattern-background-template-suitable-for-various-background-design-template-banner-poster-presentation-etc-vector.jpg") center/cover no-repeat;
+height:100vh;
+color:white;
+overflow:hidden;
+}
 
-    nav a{
-      text-decoration:none;
-      color:white;
-      background:#00c6ff;
-      padding:10px 20px;
-      border-radius:25px;
-      transition:0.3s;
-      font-weight:bold;
-    }
+/* BLUR */
 
-    nav a:hover{
-      background:#0072ff;
-      transform:scale(1.1);
-    }
+body::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+backdrop-filter: blur(8px);
+background:rgba(0,0,0,0.25);
+z-index:-1;
+}
 
-    .contenido{
-      text-align:center;
-      margin-top:80px;
-      padding:20px;
-    }
+/* LOGO */
 
-    h1{
-      font-size:42px;
-      margin-bottom:10px;
-    }
+.logo{
+position:absolute;
+top:15px;
+left:20px;
+font-size:30px;
+font-weight:bold;
+color:#7fffd4;
+}
 
-    p{
-      font-size:18px;
-    }
+/* BUSCADOR */
 
-    footer{
-      position:fixed;
-      bottom:0;
-      width:100%;
-      background:rgba(0,0,0,0.6);
-      text-align:center;
-      padding:10px;
-      font-size:14px;
-    }
-  </style>
+.search{
+position:absolute;
+top:15px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.search input{
+width:320px;
+padding:8px 12px;
+border-radius:10px;
+border:none;
+background:rgba(0,0,0,0.6);
+color:white;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+position:absolute;
+top:80px;
+left:20px;
+width:180px;
+background:rgba(0,0,0,0.55);
+padding:15px;
+border-radius:10px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.sidebar li:hover{
+background:#3a5f5f;
+}
+
+/* PANEL */
+
+.panel{
+position:absolute;
+top:120px;
+left:50%;
+transform:translateX(-50%);
+width:320px;
+background:rgba(0,0,0,0.6);
+border-radius:12px;
+padding:15px;
+display:none;
+}
+
+.panel.active{
+display:block;
+}
+
+/* TITULO */
+
+.panel h3{
+margin-top:-5px;
+margin-bottom:20px;
+font-size:16px;
+}
+
+/* LISTA */
+
+.list{
+max-height:260px;
+overflow-y:auto;
+}
+
+.list a{
+text-decoration:none;
+color:white;
+display:block;
+}
+
+.item{
+padding:8px;
+border-bottom:1px solid rgba(255,255,255,0.1);
+cursor:pointer;
+}
+
+.item:hover{
+background:rgba(255,255,255,0.08);
+}
+
+/* FOOTER */
+
+.footer{
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+font-size:12px;
+opacity:0.7;
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
-  Desarrollo y Programación de Software
-</header>
+<div class="logo">Bienvenido</div>
 
-<nav>
-  <a href="#inicio" onclick="mostrar('inicio')">Inicio</a>
-  <a href="#autor" onclick="mostrar('autor')">Autor</a>
-  <a href="Deberes1.html">Deber 1</a>
-</nav>
-
-<div class="contenido" id="contenido">
-  <h1>Bienvenido</h1>
-  <p>Esta es mi página web académica.</p>
+<div class="search">
+<input type="text" id="buscador" placeholder="Busqueda..." onkeyup="buscar()">
 </div>
 
-<footer>
-  Desarrollado por ETHAN MORAN © 2026
-</footer>
+<div class="sidebar">
+<ul>
+<li onclick="mostrarPanel('productos')">Productos</li>
+<li onclick="mostrarPanel('musica')">Musica</li>
+</ul>
+</div>
+
+<!-- PRODUCTOS -->
+
+<div class="panel active" id="productos">
+
+<h3>Productos Disponibles</h3>
+
+<div class="list">
+
+<a href="https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user" target="_blank">
+<div class="item">Visual Studio Code</div>
+</a>
+
+<a href="https://dl.google.com/chrome/install/latest/chrome_installer.exe" target="_blank">
+<div class="item">Google Chrome</div>
+</a>
+
+<a href="https://d.winrar.es/d/103z1773340198/2ElVYZG0cytO2zm14psXMw/winrar-x64-720es.exe" target="_blank">
+<div class="item">WinRAR</div>
+</a>
+
+</div>
+
+</div>
+
+<!-- MUSICA -->
+
+<div class="panel" id="musica">
+
+<h3>Musica</h3>
+
+<div class="list">
+
+<div class="item">Song 1</div>
+<div class="item">Song 2</div>
+<div class="item">Song 3</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Contacto: ethanmoran497@gmail.com
+</div>
 
 <script>
-function mostrar(seccion){
 
-  const contenido = document.getElementById("contenido");
-
-  if(seccion === "inicio"){
-    contenido.innerHTML = `
-      <h1>Bienvenido</h1>
-      <p>Esta página contiene mis deberes de programación.</p>
-    `;
-  }
-
-  if(seccion === "autor"){
-    contenido.innerHTML = `
-      <h1>Autor</h1>
-      <p>Nombre: <strong>Ethan Moran</strong></p>
-      <p>Materia: Desarrollo y Programación de Software</p>
-    `;
-  }
+function mostrarPanel(panel){
+document.querySelectorAll(".panel").forEach(p=>{
+p.classList.remove("active")
+})
+document.getElementById(panel).classList.add("active")
 }
+
+function buscar(){
+
+let input = document.getElementById("buscador").value.toLowerCase()
+let items = document.querySelectorAll(".item")
+
+let productosEncontrados=false
+let musicaEncontrada=false
+
+items.forEach(item=>{
+
+let texto=item.textContent.toLowerCase()
+
+if(texto.includes(input)){
+item.style.display="block"
+
+if(item.closest("#productos")) productosEncontrados=true
+if(item.closest("#musica")) musicaEncontrada=true
+
+}else{
+item.style.display="none"
+}
+
+})
+
+if(productosEncontrados){
+mostrarPanel("productos")
+}
+else if(musicaEncontrada){
+mostrarPanel("musica")
+}
+
+}
+
 </script>
 
 </body>
